@@ -1,6 +1,6 @@
 def get_data():
 
-    with open('C:/Github/AdventOfCode/adventure_of_code/messureData.txt') as f:
+    with open('C:/Github/AdventOfCode/day_2/puzzle_input.txt') as f:
         lines = f.readlines()
         f.close()
 

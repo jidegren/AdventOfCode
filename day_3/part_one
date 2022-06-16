@@ -1,0 +1,68 @@
+from help_functions import get_data
+line_without_newline = get_data()
+
+
+gamma_rate = [0 for i in range(len(line_without_newline[0]))]
+epsilon_rate = [0 for i in range(len(line_without_newline[0]))]
+
+# power_consumption = gamma_rate * epsilon_rate
+
+msb = [0 for i in range(len(line_without_newline[0]))]
+
+
+for line in line_without_newline:
+    for i in range(0, len(line)):
+        if int(line[i]) == 0:
+            msb[i] -= 1
+        elif int(line[i]) == 1:
+            msb[i] += 1
+
+counter = 0
+for number in msb:
+    if number < 1:
+        gamma_rate[counter] = 0
+        epsilon_rate[counter] = 1
+        counter += 1
+    elif number >= 1:
+        gamma_rate[counter] = 1
+        epsilon_rate[counter] = 0
+        counter += 1
+
+
+gamma_strings = [str(integer) for integer in gamma_rate]
+a_gamma_string = "".join(gamma_strings)
+epsilon_strings = [str(integer) for integer in epsilon_rate]
+a_epsilon_string = "".join(epsilon_strings)
+an_gamma_int = int(a_gamma_string)
+an_epsilon_int = int(a_epsilon_string)
+
+decimal_gamma, i, n = 0, 0, 0
+
+while(an_gamma_int != 0):
+    dec = an_gamma_int % 10
+    decimal_gamma = decimal_gamma + dec * pow(2, i)
+    an_gamma_int = an_gamma_int//10
+    i+=1
+    print(f"Gamma: {decimal_gamma}")
+
+decimal_epsilon, i_epsilon, n_epsilon = 0, 0, 0
+
+while(an_epsilon_int != 0):
+    dec = an_epsilon_int % 10
+    decimal_epsilon = decimal_epsilon + dec * pow(2, i_epsilon)
+    an_epsilon_int = an_epsilon_int//10
+    i_epsilon+=1
+    print(f"Epsilon: {decimal_epsilon}")
+
+
+consumption = decimal_epsilon * decimal_gamma
+
+print(f"Consumtion: {consumption}")
+
+
+
+
+
+
+
+
